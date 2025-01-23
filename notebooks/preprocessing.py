@@ -25,14 +25,14 @@ def fill_null_values(df, null_fill, remove_rows=True):
         for column, i in zip(null_fill['fill_w_top'], range(len(null_fill['fill_w_top']))):
             df[column] = df[column].fillna(null_fill['fill_w_top_val'][i])
 
-    # Return
+    # Return data frame
     return df
 
 
 if __name__ == '__main__':
-
-    train_df = pd.read_csv('projects/houseprices/datasets/train.csv')
-    test_df = pd.read_csv('projects/houseprices/datasets/test.csv')   
+    # FOR TESTING
+    train_df = pd.read_csv('datasets/train.csv')
+    test_df = pd.read_csv('datasets/test.csv')   
 
     fill_w_mean_val = train_df[['LotFrontage', 'Utilities', 'Exterior1st', 'Exterior2nd', 'BsmtFinSF1', 
                'BsmtFinSF2', 'BsmtUnfSF', 'TotalBsmtSF', 'BsmtFullBath', 'BsmtHalfBath',
@@ -49,5 +49,5 @@ if __name__ == '__main__':
     'fill_w_top_val': ['AllPub', 'VinylSd', 'VinylSd', 'TA', 'Typ', 'WD'],
     }
 
-    fill_null_values(train_df, null_fill=null_fill)
-    fill_null_values(test_df, null_fill=null_fill, remove_rows=False)
+    train_df = fill_null_values(train_df, null_fill=null_fill)
+    test_df = fill_null_values(test_df, null_fill=null_fill, remove_rows=False)
